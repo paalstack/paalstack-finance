@@ -1,0 +1,111 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1783559167367,
+      "tag": "0000_past_talisman",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1783569600000,
+      "tag": "0001_rls_policies",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1783569600001,
+      "tag": "0002_money_manager_schema",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1783569600002,
+      "tag": "0003_categories_system_unique_index",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1783569600003,
+      "tag": "0004_recurring_transactions_rls",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1783569600004,
+      "tag": "0005_accounts_add_loan_others_type",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1783569883938,
+      "tag": "0006_finance_modules_add_families_loans_ai_notifications_subscriptions",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1783569933448,
+      "tag": "0007_finance_modules_rls",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1783569933449,
+      "tag": "0008_family_role_based_access",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1783569933450,
+      "tag": "0009_join_family_by_invite_code",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1783576617580,
+      "tag": "0010_accounts_align_account_type_enum",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1783588157141,
+      "tag": "0011_quick_justice",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1783588157142,
+      "tag": "0012_family_invites_activity_accounts_rls",
+      "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1783588157143,
+      "tag": "0013_fix_family_members_rls_recursion",
+      "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "7",
+      "when": 1783588157144,
+      "tag": "0014_fix_families_family_members_cross_recursion",
+      "breakpoints": true
+    }
+  ]
+}

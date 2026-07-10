@@ -1,0 +1,31 @@
+@import '@paalstack/react-ui/styles.css';
+@import '@paalstack/react-ui/theme.css';
+
+@import 'tailwindcss';
+
+@source '../../node_modules/@paalstack/react-ui';
+
+@utility container {
+  @apply mx-auto px-4;
+  @variant lg {
+    @apply max-w-7xl;
+  }
+}
+
+@theme {
+  --font-inter: var(--font-inter);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}

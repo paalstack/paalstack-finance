@@ -1,0 +1,87 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+# CI never talks to a real database or provider — every var below is a
+# placeholder shaped like the real thing, purely so modules that construct
+# clients at import time (postgres(), Supabase, Stripe) don't throw on an
+# empty/malformed string. SKIP_ENV_VALIDATION additionally bypasses the Zod
+# schema in `lib/env.ts` for any var not listed here.
+env:
+  SKIP_ENV_VALIDATION: 'true'
+  NODE_ENV: test
+  NEXT_PUBLIC_APP_URL: http://localhost:3000
+  NEXT_PUBLIC_SUPABASE_URL: https://placeholder.supabase.co
+  NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: sb_publishable_placeholder
+  SUPABASE_SECRET_KEY: sb_secret_placeholder
+  DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres
+
+jobs:
+  lint:
+    name: Lint & format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm format:check
+
+  type-check:
+    name: Type check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm type-check
+
+  test:
+    name: Unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm test:coverage
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage-report
+          path: coverage/
+          retention-days: 7
+
+  build:
+    name: Build
+    needs: [lint, type-check, test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - name: Report bundle size
+        run: du -sh .next/static 2>/dev/null || true

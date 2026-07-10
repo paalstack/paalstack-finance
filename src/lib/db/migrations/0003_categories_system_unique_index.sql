@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX "categories_system_slug_type_idx" ON "categories" USING btree ("slug","type") WHERE "categories"."is_system" = true;
